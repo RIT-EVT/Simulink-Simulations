@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Subsystem'.
  *
- * Model version                  : 4.4
+ * Model version                  : 4.7
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Tue Sep 19 20:19:21 2023
+ * C/C++ source code generated on : Thu Sep 21 20:29:08 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR (32-bit)
@@ -18,6 +18,7 @@
  */
 
 #include "Subsystem.h"
+#include "Subsystem_private.h"
 
 /* External inputs (root inport signals with default storage) */
 ExtU_Subsystem_T Subsystem_U;
@@ -33,61 +34,16 @@ RT_MODEL_Subsystem_T *const Subsystem_M = &Subsystem_M_;
 void Subsystem_step(void)
 {
   /* Outputs for Atomic SubSystem: '<Root>/Subsystem' */
-  /* Switch: '<S1>/Switch1' incorporates:
+
+  /* S-Function (TMS): '<S1>/S-Function Builder' incorporates:
    *  Inport: '<Root>/In1'
-   *  Switch: '<S1>/Switch'
-   *  Switch: '<S1>/Switch2'
-   *  Switch: '<S1>/Switch3'
-   *  Switch: '<S1>/Switch4'
+   *  Outport: '<Root>/Out1'
+   *  Outport: '<Root>/Out2'
+   *  Outport: '<Root>/Out3'
    */
-  if (Subsystem_U.In1 >= 50.0) {
-    /* Outport: '<Root>/Out2' incorporates:
-     *  Constant: '<S1>/Constant'
-     */
-    Subsystem_Y.Out2 = 100.0;
+  TMS_Outputs_wrapper(&Subsystem_U.In1, &Subsystem_Y.Out1, &Subsystem_Y.Out2,
+                      &Subsystem_Y.Out3);
 
-    /* Outport: '<Root>/Out1' incorporates:
-     *  Constant: '<S1>/Constant'
-     */
-    Subsystem_Y.Out1 = 100.0;
-  } else if (Subsystem_U.In1 >= 40.0) {
-    /* Outport: '<Root>/Out2' incorporates:
-     *  Constant: '<S1>/Constant1'
-     *  Switch: '<S1>/Switch'
-     */
-    Subsystem_Y.Out2 = 75.0;
-
-    /* Outport: '<Root>/Out1' incorporates:
-     *  Constant: '<S1>/Constant1'
-     *  Switch: '<S1>/Switch3'
-     */
-    Subsystem_Y.Out1 = 75.0;
-  } else {
-    if (Subsystem_U.In1 >= 30.0) {
-      /* Switch: '<S1>/Switch2' incorporates:
-       *  Constant: '<S1>/Constant2'
-       *  Outport: '<Root>/Out2'
-       *  Switch: '<S1>/Switch'
-       */
-      Subsystem_Y.Out2 = 50.0;
-    } else {
-      /* Outport: '<Root>/Out2' incorporates:
-       *  Constant: '<S1>/Constant3'
-       *  Switch: '<S1>/Switch'
-       *  Switch: '<S1>/Switch2'
-       */
-      Subsystem_Y.Out2 = 0.0;
-    }
-
-    /* Outport: '<Root>/Out1' incorporates:
-     *  Constant: '<S1>/Constant2'
-     *  Switch: '<S1>/Switch3'
-     *  Switch: '<S1>/Switch5'
-     */
-    Subsystem_Y.Out1 = 50.0;
-  }
-
-  /* End of Switch: '<S1>/Switch1' */
   /* End of Outputs for SubSystem: '<Root>/Subsystem' */
 }
 

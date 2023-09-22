@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'Subsystem'.
  *
- * Model version                  : 4.4
+ * Model version                  : 4.7
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Tue Sep 19 20:19:21 2023
+ * C/C++ source code generated on : Thu Sep 21 20:29:08 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR (32-bit)
@@ -44,6 +44,7 @@ typedef struct {
 typedef struct {
   real_T Out1;                         /* '<Root>/Out1' */
   real_T Out2;                         /* '<Root>/Out2' */
+  real_T Out3;                         /* '<Root>/Out3' */
 } ExtY_Subsystem_T;
 
 /* Real-time Model Data Structure */
@@ -77,13 +78,13 @@ extern RT_MODEL_Subsystem_T *const Subsystem_M;
  * MATLAB hilite_system command to trace the generated code back
  * to the parent model.  For example,
  *
- * hilite_system('SIL_TMS/Subsystem')    - opens subsystem SIL_TMS/Subsystem
- * hilite_system('SIL_TMS/Subsystem/Kp') - opens and selects block Kp
+ * hilite_system('SIL_TMS/Subsystem/Subsystem')    - opens subsystem SIL_TMS/Subsystem/Subsystem
+ * hilite_system('SIL_TMS/Subsystem/Subsystem/Kp') - opens and selects block Kp
  *
  * Here is the system hierarchy for this model
  *
- * '<Root>' : 'SIL_TMS'
- * '<S1>'   : 'SIL_TMS/Subsystem'
+ * '<Root>' : 'SIL_TMS/Subsystem'
+ * '<S1>'   : 'SIL_TMS/Subsystem/Subsystem'
  */
 #endif                                 /* RTW_HEADER_Subsystem_h_ */
 

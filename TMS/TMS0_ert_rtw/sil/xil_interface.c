@@ -1,12 +1,12 @@
 /*
  * File: xil_interface.c
  *
- * SIL generated interface for code: "Subsystem"
+ * SIL generated interface for code: "TMS0"
  *
  */
 
-#include "Subsystem.h"
-#include "Subsystem_private.h"
+#include "TMS0.h"
+#include "TMS0_private.h"
 #include "xil_interface.h"
 
 /* Functions with a C call interface */
@@ -25,8 +25,8 @@ extern "C"
 #endif
 
 static XILIOData xil_fcnid0_task1_output_u[2];
-static XILIOData xil_fcnid0_task1_y[3];
-static XILIOData xil_fcnid0_init_y[3];
+static XILIOData xil_fcnid0_task1_y[4];
+static XILIOData xil_fcnid0_init_y[4];
 
 /* In-the-Loop Interface functions - see xil_interface.h */
 XIL_INTERFACE_ERROR_CODE xilProcessParams(uint32_T xilFcnId)
@@ -90,7 +90,7 @@ XIL_INTERFACE_ERROR_CODE xilInitialize(uint32_T xilFcnId)
   /* initialize output storage owned by In-the-Loop */
   /* Single In-the-Loop Component */
   if (xilFcnId == 0) {
-    Subsystem_initialize();
+    TMS0_initialize();
   } else {
     errorCode = XIL_INTERFACE_UNKNOWN_FCNID;
   }
@@ -160,7 +160,7 @@ XIL_INTERFACE_ERROR_CODE xilGetHostToTargetData(uint32_T xilFcnId,
         uint32_T tableIdx = 0;
 
         {
-          void * dataAddress = (void *) &(Subsystem_U.In1);
+          void * dataAddress = (void *) &(TMS0_U.In1);
           xil_fcnid0_task1_output_u[tableIdx].memUnitLength = 1 * sizeof(real_T);
           xil_fcnid0_task1_output_u[tableIdx++].address = (MemUnit_T *)
             dataAddress;
@@ -212,7 +212,7 @@ XIL_INTERFACE_ERROR_CODE xilOutput(uint32_T xilFcnId, uint32_T xilTID)
 
   switch (xilTID) {
    case 1:
-    Subsystem_step();
+    TMS0_step();
     break;
 
    default:
@@ -255,13 +255,19 @@ XIL_INTERFACE_ERROR_CODE xilGetTargetToHostData(uint32_T xilFcnId,
         uint32_T tableIdx = 0;
 
         {
-          void * dataAddress = (void *) &(Subsystem_Y.Out1);
+          void * dataAddress = (void *) &(TMS0_Y.Out1);
           xil_fcnid0_init_y[tableIdx].memUnitLength = 1 * sizeof(real_T);
           xil_fcnid0_init_y[tableIdx++].address = (MemUnit_T *) dataAddress;
         }
 
         {
-          void * dataAddress = (void *) &(Subsystem_Y.Out2);
+          void * dataAddress = (void *) &(TMS0_Y.Out2);
+          xil_fcnid0_init_y[tableIdx].memUnitLength = 1 * sizeof(real_T);
+          xil_fcnid0_init_y[tableIdx++].address = (MemUnit_T *) dataAddress;
+        }
+
+        {
+          void * dataAddress = (void *) &(TMS0_Y.Out3);
           xil_fcnid0_init_y[tableIdx].memUnitLength = 1 * sizeof(real_T);
           xil_fcnid0_init_y[tableIdx++].address = (MemUnit_T *) dataAddress;
         }
@@ -296,13 +302,19 @@ XIL_INTERFACE_ERROR_CODE xilGetTargetToHostData(uint32_T xilFcnId,
         uint32_T tableIdx = 0;
 
         {
-          void * dataAddress = (void *) &(Subsystem_Y.Out1);
+          void * dataAddress = (void *) &(TMS0_Y.Out1);
           xil_fcnid0_task1_y[tableIdx].memUnitLength = 1 * sizeof(real_T);
           xil_fcnid0_task1_y[tableIdx++].address = (MemUnit_T *) dataAddress;
         }
 
         {
-          void * dataAddress = (void *) &(Subsystem_Y.Out2);
+          void * dataAddress = (void *) &(TMS0_Y.Out2);
+          xil_fcnid0_task1_y[tableIdx].memUnitLength = 1 * sizeof(real_T);
+          xil_fcnid0_task1_y[tableIdx++].address = (MemUnit_T *) dataAddress;
+        }
+
+        {
+          void * dataAddress = (void *) &(TMS0_Y.Out3);
           xil_fcnid0_task1_y[tableIdx].memUnitLength = 1 * sizeof(real_T);
           xil_fcnid0_task1_y[tableIdx++].address = (MemUnit_T *) dataAddress;
         }
@@ -348,7 +360,7 @@ XIL_INTERFACE_ERROR_CODE xilTerminate(uint32_T xilFcnId)
   }                                    /* if */
 
   /* Invoke any terminate Function */
-  Subsystem_terminate();
+  TMS0_terminate();
 
   /* Free Opaque Region Based Data */
   return XIL_INTERFACE_SUCCESS;

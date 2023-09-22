@@ -2,7 +2,7 @@
 ## Makefile generated for component 'Subsystem'. 
 ## 
 ## Makefile     : Subsystem.mk
-## Generated on : Tue Sep 19 20:19:32 2023
+## Generated on : Thu Sep 21 20:29:11 2023
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/Subsystem.exe
 ## Product type : executable
 ## 
@@ -155,7 +155,7 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STAN
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/Subsystem_ert_rtw/Subsystem.c
+SRCS = $(START_DIR)/Subsystem_ert_rtw/Subsystem.c $(START_DIR)/TMS_wrapper.c
 
 MAIN_SRC = $(START_DIR)/Subsystem_ert_rtw/ert_main.c
 
@@ -165,7 +165,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = Subsystem.obj
+OBJS = Subsystem.obj TMS_wrapper.obj
 
 MAIN_OBJ = ert_main.obj
 
@@ -290,6 +290,10 @@ Subsystem.obj : $(START_DIR)/Subsystem_ert_rtw/Subsystem.c
 
 
 ert_main.obj : $(START_DIR)/Subsystem_ert_rtw/ert_main.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+TMS_wrapper.obj : $(START_DIR)/TMS_wrapper.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

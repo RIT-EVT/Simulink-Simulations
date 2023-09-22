@@ -1462,6 +1462,31 @@ static void sendInitializeCommand(SimStruct *S)
                       }
                     }
                   }
+
+                  {
+                    /* DataInterface: output, 3 */
+                    void * dataInterfacePtr = (void *) ssGetOutputPortSignal(S,
+                      2);
+
+                    {
+                      uint8_T * simDataMemUnitPtr;
+
+                      /* DataInterface: output, 3 */
+                      simDataMemUnitPtr = ( uint8_T *) dataInterfacePtr;
+
+                      {
+                        size_t num_elements = 1;
+
+                        {
+                          if (xilReadData(S, simDataMemUnitPtr, num_elements,
+                                          MEM_UNIT_DOUBLE_TYPE) !=
+                              XILHOSTAPPSVC_SUCCESS) {
+                            return;
+                          }            /* if */
+                        }
+                      }
+                    }
+                  }
                   break;
                 }
 
@@ -1561,7 +1586,7 @@ static void mdlInitializeSizes(SimStruct *S)
   ssSetInputPortComplexSignal(S, 0, COMPLEX_NO);
 
   /* using port based sample times */
-  ssSetInputPortSampleTime(S, 0, 0.2);
+  ssSetInputPortSampleTime(S, 0, 1.2);
   ssSetInputPortOffsetTime(S, 0, 0);
 
   /* sampling mode */
@@ -1585,7 +1610,7 @@ static void mdlInitializeSizes(SimStruct *S)
 
   }
 
-  if (!ssSetNumOutputPorts(S, 2))
+  if (!ssSetNumOutputPorts(S, 3))
     return;
 
   /* Output Port 0 */
@@ -1614,7 +1639,7 @@ static void mdlInitializeSizes(SimStruct *S)
   ssSetOutputPortComplexSignal(S, 0, COMPLEX_NO);
 
   /* using port based sample times */
-  ssSetOutputPortSampleTime(S, 0, 0.2);
+  ssSetOutputPortSampleTime(S, 0, 1.2);
   ssSetOutputPortOffsetTime(S, 0, 0);
 
   /* sampling mode */
@@ -1663,7 +1688,7 @@ static void mdlInitializeSizes(SimStruct *S)
   ssSetOutputPortComplexSignal(S, 1, COMPLEX_NO);
 
   /* using port based sample times */
-  ssSetOutputPortSampleTime(S, 1, 0.2);
+  ssSetOutputPortSampleTime(S, 1, 1.2);
   ssSetOutputPortOffsetTime(S, 1, 0);
 
   /* sampling mode */
@@ -1682,6 +1707,55 @@ static void mdlInitializeSizes(SimStruct *S)
     if (unitIdReg == INVALID_UNIT_ID)
       return;
     ssSetOutputPortUnit(S, 1, unitIdReg);
+
+#endif
+
+  }                                    /* Output Port 2 */
+
+  if (ssGetSimMode(S) != SS_SIMMODE_SIZES_CALL_ONLY) {
+    DTypeId dataTypeId = INVALID_DTYPE_ID;
+
+    /* set datatype */
+    dataTypeId = 0;
+    ssSetOutputPortDataType(S, 2, dataTypeId);
+  }
+
+  /* dimensions */
+  {
+    DECL_AND_INIT_DIMSINFO(di);
+    int_T dims[ 1 ] = { 1 };
+
+    di.numDims = 1;
+    di.dims = dims;
+    di.width = 1;
+    ssSetOutputPortDimensionInfo(S, 2, &di);
+  }
+
+  ssSetOutputPortDimensionsMode(S, 2, FIXED_DIMS_MODE);
+
+  /* complexity */
+  ssSetOutputPortComplexSignal(S, 2, COMPLEX_NO);
+
+  /* using port based sample times */
+  ssSetOutputPortSampleTime(S, 2, 1.2);
+  ssSetOutputPortOffsetTime(S, 2, 0);
+
+  /* sampling mode */
+  ssSetOutputPortFrameData(S, 2, FRAME_NO);
+
+  /* units */
+  if (ssGetSimMode(S) != SS_SIMMODE_SIZES_CALL_ONLY) {
+
+#if defined (MATLAB_MEX_FILE)
+
+    UnitId unitIdReg;
+    ssRegisterUnitFromExpr(
+      S,
+      "",
+      &unitIdReg);
+    if (unitIdReg == INVALID_UNIT_ID)
+      return;
+    ssSetOutputPortUnit(S, 2, unitIdReg);
 
 #endif
 
@@ -2186,6 +2260,31 @@ static void XILoutputTID01(SimStruct *S, int tid)
                       uint8_T * simDataMemUnitPtr;
 
                       /* DataInterface: output, 2 */
+                      simDataMemUnitPtr = ( uint8_T *) dataInterfacePtr;
+
+                      {
+                        size_t num_elements = 1;
+
+                        {
+                          if (xilReadData(S, simDataMemUnitPtr, num_elements,
+                                          MEM_UNIT_DOUBLE_TYPE) !=
+                              XILHOSTAPPSVC_SUCCESS) {
+                            return;
+                          }            /* if */
+                        }
+                      }
+                    }
+                  }
+
+                  {
+                    /* DataInterface: output, 3 */
+                    void * dataInterfacePtr = (void *) ssGetOutputPortSignal(S,
+                      2);
+
+                    {
+                      uint8_T * simDataMemUnitPtr;
+
+                      /* DataInterface: output, 3 */
                       simDataMemUnitPtr = ( uint8_T *) dataInterfacePtr;
 
                       {
