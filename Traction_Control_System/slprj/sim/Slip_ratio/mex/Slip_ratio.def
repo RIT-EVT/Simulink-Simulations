@@ -1,0 +1,4 @@
+LIBRARY ..\..\..\..\Slip_ratio_msf.mexw64
+EXPORTS
+    mexFunction
+    mexfilerequiredapiversion
