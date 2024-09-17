@@ -28,33 +28,15 @@ while ~feof(fid)
         
         % Convert to a single timestamp
         t = duration(hour, minute, second + msec/1000);
-        time(:,fid) = t;  % Append to time array
+        time = time(:,fid);  % Append to time array
         
         % CAN ID
         can_id_hex = tokens{5};
-        can_id(:,fid) = hex2dec(can_id_hex);
+        can_id = [can_id; hex2dec(can_id_hex)];
         
         % Data bytes
         data_bytes = str2num(tokens{6}); %#ok<ST2NM> % Convert the data bytes into an array
-        data(:,fid) = data_bytes;
-% I changed this stuff from this. I think the issue is that the rows arent
-% balanced because the data is dynamic so any slots that aren't filled need
-% to have 0s fill in the blanks. But thats how the data is so it should
-% just fill those ?????
-% Convert to a single timestamp
-       % t = duration(hour, minute, second + msec/1000);
-       % time = [time; t];  % Append to time array
-        
-        % CAN ID
-       % can_id_hex = tokens{5};
-       % can_id = [can_id; hex2dec(can_id_hex)];
-        
-        % Data bytes
-       % data_bytes = str2num(tokens{6}); %#ok<ST2NM> % Convert the data bytes into an array
-       % data = [data; data_bytes];
-
-
-
+        data = [data; data_bytes];
     end
 end
 
